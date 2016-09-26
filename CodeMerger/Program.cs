@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using CommonLibrary;
 using CodeMergerEntity;
+using System.Configuration;
 
 using SVN;
 using Microsoft.Practices.Unity;
+using TFS;
 
 namespace CommonLibrary
 {
@@ -18,14 +20,14 @@ namespace CommonLibrary
         static void Main(string[] args)
         {
             configEntity = new ConfigEntity();
-            configEntity.ConfigTool = Convert.ToInt32(System.Configuration.ConfigurationSettings.AppSettings.Get("ConfigTool"));
-            configEntity.userName = System.Configuration.ConfigurationSettings.AppSettings.Get("userName");
-            configEntity.password = System.Configuration.ConfigurationSettings.AppSettings.Get("password");
-            configEntity.author = System.Configuration.ConfigurationSettings.AppSettings.Get("author");
-            configEntity.sourceUrl = System.Configuration.ConfigurationSettings.AppSettings.Get("sourceUrl");
-            configEntity.targetUrl = System.Configuration.ConfigurationSettings.AppSettings.Get("targetUrl");
-            configEntity.checkoutPath = System.Configuration.ConfigurationSettings.AppSettings.Get("checkoutPath");
-            configEntity.logFilePath = System.Configuration.ConfigurationSettings.AppSettings.Get("logFilePath");
+            configEntity.ConfigTool = Convert.ToInt32(ConfigurationManager.AppSettings["ConfigTool"]);
+            configEntity.userName = ConfigurationManager.AppSettings["userName"];
+            configEntity.password = ConfigurationManager.AppSettings["password"];
+            configEntity.author = ConfigurationManager.AppSettings["author"];
+            configEntity.sourceUrl = ConfigurationManager.AppSettings["sourceUrl"];
+            configEntity.targetUrl = ConfigurationManager.AppSettings["targetUrl"];
+            configEntity.checkoutPath = ConfigurationManager.AppSettings["checkoutPath"];
+            configEntity.logFilePath = ConfigurationManager.AppSettings["logFilePath"];
 
             //IUnityContainer objContainer = new UnityContainer();
             //objContainer.RegisterType<IMerger, SVNMerger>();
@@ -42,6 +44,7 @@ namespace CommonLibrary
                 case (Int32)VersionControlTools.GIT:
                     break;
                 case (Int32)VersionControlTools.TFS:
+                    merger = new Merger(new TFSMerger(configEntity));
                     break;
                 default:
                     break;

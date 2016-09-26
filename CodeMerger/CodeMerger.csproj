@@ -54,6 +54,7 @@
       <HintPath>..\..\..\Shared\SharpSvn-v1.800x-1.8009.3299.43\SharpSvn-v1.800x-1.8009.3299.43\release\net40\x86\SharpSvn.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -84,6 +85,10 @@
     <ProjectReference Include="..\SVN\SVN.csproj">
       <Project>{c8ec47c8-9905-42bd-8e8e-60e4e1104cbc}</Project>
       <Name>SVN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TFS\TFS.csproj">
+      <Project>{af861131-083c-4e28-9d36-d419a9b54f15}</Project>
+      <Name>TFS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
