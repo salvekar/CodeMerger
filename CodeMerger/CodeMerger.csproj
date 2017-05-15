@@ -86,10 +86,6 @@
       <Project>{c8ec47c8-9905-42bd-8e8e-60e4e1104cbc}</Project>
       <Name>SVN</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TFS\TFS.csproj">
-      <Project>{af861131-083c-4e28-9d36-d419a9b54f15}</Project>
-      <Name>TFS</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

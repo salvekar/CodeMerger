@@ -38,18 +38,18 @@ namespace SVN
             // Get latest code for target path - full recursive
             SvnUriTarget branch = new SvnUriTarget(configEntity.targetUrl);
             #region UpdateorCheckout
-            //if (Directory.Exists(configEntity.checkoutPath + "\\" + svnDir))
-            //{
-            //    SvnUpdateArgs updateArgs = new SvnUpdateArgs();
-            //    updateArgs.Depth = SvnDepth.Infinity;
-            //    svnClient.Update(configEntity.checkoutPath, updateArgs, out result);
-            //}
-            //else
-            //{
-            //    SvnCheckOutArgs checkoutArgs = new SvnCheckOutArgs();
-            //    checkoutArgs.Depth = SvnDepth.Infinity;
-            //    svnClient.CheckOut(branch, configEntity.checkoutPath, checkoutArgs, out result);
-            //}
+            if (Directory.Exists(configEntity.checkoutPath + "\\" + svnDir))
+            {
+                SvnUpdateArgs updateArgs = new SvnUpdateArgs();
+                updateArgs.Depth = SvnDepth.Infinity;
+                svnClient.Update(configEntity.checkoutPath, updateArgs, out result);
+            }
+            else
+            {
+                SvnCheckOutArgs checkoutArgs = new SvnCheckOutArgs();
+                checkoutArgs.Depth = SvnDepth.Infinity;
+                svnClient.CheckOut(branch, configEntity.checkoutPath, checkoutArgs, out result);
+            }
             #endregion
 
             #region Get eligible revisions from trunk
@@ -119,7 +119,7 @@ namespace SVN
                 SvnCommitArgs commitArgs = new SvnCommitArgs();
                 commitArgs.Depth = SvnDepth.Infinity;
                 commitArgs.LogMessage = "Merged the code from " + configEntity.sourceUrl + ". From revision: " + (start + 1).ToString() + " to " + end.ToString();
-                svnClient.Commit(configEntity.checkoutPath, commitArgs);
+                //svnClient.Commit(configEntity.checkoutPath, commitArgs);
             }
             catch (Exception ex)
             {
@@ -129,7 +129,7 @@ namespace SVN
                 //successfiles.Clear();
                 Logger log = new Logger(configEntity.logFilePath);
                 conflictfiles.Add(ex.Message);
-                conflictfiles.Add(ex.InnerException.ToString());
+                conflictfiles.Add(Convert.ToString(ex.InnerException));
                 log.WriteLog(conflictfiles);
             }            
         }

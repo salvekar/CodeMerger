@@ -8,7 +8,7 @@ using System.Configuration;
 
 using SVN;
 using Microsoft.Practices.Unity;
-using TFS;
+//using TFS;
 
 namespace CommonLibrary
 {
@@ -43,9 +43,9 @@ namespace CommonLibrary
                     break;
                 case (Int32)VersionControlTools.GIT:
                     break;
-                case (Int32)VersionControlTools.TFS:
-                    merger = new Merger(new TFSMerger(configEntity));
-                    break;
+                //case (Int32)VersionControlTools.TFS:
+                //    merger = new Merger(new TFSMerger(configEntity));
+                //    break;
                 default:
                     break;
             }
